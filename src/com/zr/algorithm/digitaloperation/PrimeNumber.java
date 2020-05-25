@@ -20,26 +20,33 @@ import java.util.Scanner;
  */
 public class PrimeNumber {
     public static void main(String[] args) {
-        findPrimeNumber();
+        Scanner in = new Scanner(System.in);
+        int first = in.nextInt();
+        int second = in.nextInt();
+        long startTime = System.currentTimeMillis();
+        findPrimeNumber(first, second);
+        long endTime = System.currentTimeMillis();
+        System.out.println("total used time is: " + (endTime - startTime));
     }
 
     /**
      * 找第m个素数到第n个的所有素数
      */
-    public static void findPrimeNumber() {
-        Scanner in = new Scanner(System.in);
-        int first = in.nextInt();
-        int second = in.nextInt();
+    public static void findPrimeNumber(int first, int second) {
+
         List<Integer> list = new ArrayList<>();
         int num = 3;
         int count = 1;
         if (first == count)
             list.add(2);
-
         while (true) {
             boolean b = true;
+            if (num%2==0){
+                num++;
+                continue;
+            }
             s:
-            for (int i = 2; i < num; i++) {
+            for (int i = 3; i < num; i+=2) {
                 if (num % i == 0) {
                     b = false;
                     break s;
@@ -56,6 +63,7 @@ public class PrimeNumber {
         }
 
         int time = 1;
+
         for (int i = 0; i < list.size(); i++) {
             if (time % 10 == 0) {
                 System.out.println(list.get(i));
@@ -63,7 +71,6 @@ public class PrimeNumber {
             } else {
                 if (time == list.size()) {
                     System.out.print(list.get(i));
-
                 } else
                     System.out.print(list.get(i) + " ");
             }
